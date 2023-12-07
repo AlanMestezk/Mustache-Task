@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Montserrat+Alternates:wght@600&display=swap');
+:root {
+    font-family: 'Bree Serif', serif;
+    font-family: 'Montserrat Alternates', sans-serif;
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+}
