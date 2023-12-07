@@ -176,7 +176,7 @@ export const Relevant = ()=>{
                 <div className={style.showTask}>
 
                     {
-                        tasks.map((item, index)=>(
+                        tasks.map((item, _index)=>(
 
                             <section key={item} className={style.sectionTask}>
 
