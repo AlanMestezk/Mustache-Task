@@ -35,15 +35,27 @@
     border: solid 1px aliceblue;
 }
 
-.msgError {
-    margin-top: -0.6px;
-    color: red;
-}
-
 .sectionTask {
     margin-bottom: 9px;
     background-color: rgb(6, 26, 44);
     min-width: 200px;
     border-radius: 50px;
     color: aliceblue;
+}
+
+.divButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trash {
+    color: red;
+    cursor: pointer;
+    margin-right: 9px;
+}
+
+.edit {
+    cursor: pointer;
+    color: aqua;
 }

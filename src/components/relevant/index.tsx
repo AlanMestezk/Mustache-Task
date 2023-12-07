@@ -1,5 +1,7 @@
-import { useState } from 'react'
-import style        from './relevant.module.css'
+import { useState }   from 'react'
+import style          from './relevant.module.css'
+import { FaTrashCan } from "react-icons/fa6";
+import { FaEdit }     from "react-icons/fa";
 
 
 
@@ -8,11 +10,14 @@ export const Relevant = ()=>{
     const [input, setInput] = useState("")
     //tasks
     const [tasks, setTasks] = useState([
-        'Estudar',
-        'Comprar pão',
-        'Ir a academia'
-        
+        'Tarefa exemplo 1',
+        'Tarefa exemplo 2'
     ])
+
+    const [editTask, setEditTask] = useState({
+        enabled: false,
+        task: ''
+    })
 
     //functions
     const handleAddTask = ()=>{
@@ -24,12 +29,63 @@ export const Relevant = ()=>{
             return
         }
 
+        if(editTask.enabled){
+            handleSaveEdit()
+            return
+        }
+
         setTasks(
             task => [...task, input]
         )
         
         setInput('')
     }
+    
+
+    const handleSaveEdit = ()=>{
+
+        let findIndexTask = tasks.findIndex(
+            task => task === editTask.task
+        )
+
+        let alltasks = [...tasks]
+
+        alltasks[findIndexTask] = input
+        
+        setTasks(alltasks)
+
+        setEditTask({
+            enabled: false,
+            task:''
+        })
+
+        setInput('')
+    }
+
+
+    const handleDelete = (item: string)=>{
+
+        const removeTask = tasks.filter(
+            task => task !== item
+        )
+
+        console.log(removeTask)
+        setTasks(removeTask)
+
+    }
+
+
+    const handleEdit = (item: string)=>{
+
+        setInput(item)
+
+        setEditTask({
+            enabled: true,
+            task: item
+        })
+    }
+
+
 
     return(
 
@@ -52,7 +108,12 @@ export const Relevant = ()=>{
                         onChange={(e)=> setInput(e.target.value)}
                     />
 
-                    <button className={style.buttonInput} onClick={handleAddTask}>Adicionar tarefa</button>
+                    <button className={style.buttonInput} onClick={handleAddTask}>
+                        {
+                            editTask.enabled ?
+                            "Atualizar tarefa" : "Adicionar tarefa"
+                        }
+                    </button>
 
                     
             
@@ -77,9 +138,32 @@ export const Relevant = ()=>{
 
                             <section key={item} className={style.sectionTask}>
 
-                                <span className={style.tasks}>{item}</span>
-                                <button>Excluir</button>
+                                <div>
 
+                                     <span className={style.tasks}>{item}</span> 
+
+                                </div>
+
+                                
+
+                                <div className={style.divButtons}>
+
+                                    <abbr title="Delete">
+
+                                        <p onClick={()=>handleDelete(item)} className={style.trash}>
+                                            <FaTrashCan/>
+                                        </p>
+                                    </abbr>
+
+                                    <abbr title="Edit">
+                                
+                                        <p onClick={()=>handleEdit(item)} className={style.edit}>
+                                            <FaEdit/>
+                                        </p>
+                                    </abbr>
+
+                                </div>
+                                
                             </section>
 
                         ))

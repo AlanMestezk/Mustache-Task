@@ -1,4 +1,4 @@
-import logo from '../../assets/moustache.png'
+import logo  from '../../assets/moustache.png'
 import style from './header.module.css'
 
 interface HeaderProps{
