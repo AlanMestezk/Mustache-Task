@@ -1,15 +1,14 @@
-import { useState }   from 'react'
+import { useEffect, useState }   from 'react'
 import style          from './relevant.module.css'
 import { FaTrashCan } from "react-icons/fa6";
 import { FaEdit }     from "react-icons/fa";
-
 
 
 export const Relevant = ()=>{
 
     const [input, setInput] = useState("")
     //tasks
-    const [tasks, setTasks] = useState([
+    const [tasks, setTasks] = useState<string[]>([
         'Tarefa exemplo 1',
         'Tarefa exemplo 2'
     ])
@@ -39,8 +38,18 @@ export const Relevant = ()=>{
         )
         
         setInput('')
+        
+        localStorage.setItem(
+
+            "@Mustache-Task", JSON.stringify(
+
+                [...tasks, input]
+            )
+
+        )
+        
     }
-    
+
 
     const handleSaveEdit = ()=>{
 
@@ -60,6 +69,13 @@ export const Relevant = ()=>{
         })
 
         setInput('')
+
+        localStorage.setItem(
+
+            "@Mustache-Task", JSON.stringify(
+                alltasks
+            )
+        )
     }
 
 
@@ -72,6 +88,12 @@ export const Relevant = ()=>{
         console.log(removeTask)
         setTasks(removeTask)
 
+        localStorage.setItem(
+            "@Mustache-Task", JSON.stringify(
+                removeTask
+            )
+        )
+
     }
 
 
@@ -83,7 +105,16 @@ export const Relevant = ()=>{
             enabled: true,
             task: item
         })
+
     }
+
+    //effect
+    useEffect(() => {
+        const storedTasks = localStorage.getItem("@Mustache-Task");
+        if (storedTasks) {
+          setTasks(JSON.parse(storedTasks));
+        }
+    }, []);
 
 
 
@@ -109,10 +140,12 @@ export const Relevant = ()=>{
                     />
 
                     <button className={style.buttonInput} onClick={handleAddTask}>
+
                         {
                             editTask.enabled ?
                             "Atualizar tarefa" : "Adicionar tarefa"
                         }
+
                     </button>
 
                     
@@ -125,8 +158,17 @@ export const Relevant = ()=>{
             <section className={style.containerTask}>
 
                 <div className={style.divList}>
-
-                    <h3 className={style.textList}>Lista de tarefas:</h3>
+                    
+                    {
+                        tasks && tasks.length ?
+                        (
+                            <h3 className={style.textList}>Lista de tarefas:</h3>
+                        ):
+                        (
+                            <></>
+                        )
+                    }
+                    
                 
                 </div>
 
@@ -138,7 +180,7 @@ export const Relevant = ()=>{
 
                             <section key={item} className={style.sectionTask}>
 
-                                <div>
+                                <div className={style.divTask}>
 
                                      <span className={style.tasks}>{item}</span> 
 

@@ -37,10 +37,21 @@
 
 .sectionTask {
     margin-bottom: 9px;
-    background-color: rgb(6, 26, 44);
-    min-width: 200px;
+    background-image: url('../../assets/moustache.png');
+    background-color: rgb(32, 47, 74);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 200px 170px;
+    border: solid 4px aliceblue;
+    min-width: 100px;
+    height: 70px;
     border-radius: 50px;
     color: aliceblue;
+}
+
+.divTask {
+    padding: 3px;
 }
 
 .divButtons {
@@ -50,7 +61,7 @@
 }
 
 .trash {
-    color: red;
+    color: rgb(217, 124, 124);
     cursor: pointer;
     margin-right: 9px;
 }
