@@ -1,7 +1,7 @@
 import { useEffect, useState }   from 'react'
-import style          from './relevant.module.css'
-import { FaTrashCan } from "react-icons/fa6";
-import { FaEdit }     from "react-icons/fa";
+import style                     from './relevant.module.css'
+import { FaTrashCan }            from "react-icons/fa6";
+import { FaEdit }                from "react-icons/fa";
 
 
 export const Relevant = ()=>{
